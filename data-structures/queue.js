@@ -52,28 +52,81 @@ What's the time complexity?
 
 function Queue(capacity) {
   // implement me...
+  this.capacity = capacity || Infinity;
+  this.front = {};
+  this.length = 0;
+  this.Node = function(data) {
+    this.data = data;
+    this.next = null;
+  };
 }
 
 Queue.prototype.enqueue = function(value) {
   // implement me...
+  let inLine = new this.Node(value);
+  if (!this.front.data) {
+    this.front = inLine;
+    this.length++;
+  } else {
+    let end = this.front;
+    this.length = 1;
+    while (end.next) {
+      end = end.next;
+      this.length++;
+    }
+    end.next = inLine;
+    this.length++;
+  }
+  return this.count;
 };
-// Time complexity:
+// Time complexity: O(n)
 
 Queue.prototype.dequeue = function() {
   // implement me...
+  let data;
+  if (!this.front.data) {
+    console.log('The Queue is already empty');
+    return null;
+  } else if (!this.front.next) {
+    data = this.front.data;
+    this.front = {};
+    this.count--;
+  } else {
+    data = this.front.data;
+    this.front = this.front.next;
+    this.count--;
+  }
+  return data;
 };
-// Time complexity:
+// Time complexity: O(1)
 
 Queue.prototype.peek = function() {
   // implement me...
+  if (!this.front.data) {
+    console.log('The Queue is empty');
+    return null;
+  } else {
+    return this.front.data;
+  }
 };
 
 Queue.prototype.count = function() {
   // implement me...
+  return this.count;
 };
-// Time complexity:
+// Time complexity: O(1)
 
-
+let myQueue = new Queue();
+myQueue.enqueue(10);
+myQueue.enqueue(9);
+myQueue.enqueue(8);
+myQueue.enqueue(1);
+myQueue.dequeue();
+console.log(myQueue.peek());
+myQueue.dequeue();
+myQueue.dequeue();
+myQueue.dequeue();
+console.log(myQueue.dequeue());
 
 /*
 *** Exercises:

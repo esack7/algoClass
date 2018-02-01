@@ -54,6 +54,7 @@ function Stack(capacity) {
   // implement me...
   this.capacity = capacity || Infinity;
   this.top = {};
+  this.count = 0;
   this.Node = function(data) {
     this.data = data;
     this.next = null;
@@ -65,7 +66,8 @@ Stack.prototype.push = function(value) {
   let added = new this.Node(value);
   added.next = this.top;
   this.top = added;
-  return this.top;
+  this.count++;
+  return this.count;
 };
 // Time complexity:
 
@@ -76,6 +78,7 @@ Stack.prototype.pop = function() {
     return null;
   } else {
     this.top = this.top.next;
+    this.count--;
     return this.top;
   }
 };
@@ -94,30 +97,20 @@ Stack.prototype.peek = function() {
 
 Stack.prototype.count = function() {
   // implement me...
-  let count = 0;
-  if (!this.top.data) {
-    return count;
-  } else {
-    let current = this.top;
-    while (current.next) {
-      count++;
-      current = current.next;
-    }
-    return count;
-  }
+  return this.count;
 };
-// Time complexity:
+// Time complexity: O(1)
 
-var eStacko = new Stack();
-eStacko.push(12);
-eStacko.push(32);
-eStacko.push(100);
-console.log(eStacko.count());
-console.log(eStacko.peek());
-eStacko.pop();
-eStacko.pop();
-eStacko.pop();
-eStacko.pop();
+var myStack = new Stack();
+myStack.push(12);
+myStack.push(32);
+myStack.push(100);
+console.log(myStack.count());
+console.log(myStack.peek());
+myStack.pop();
+myStack.pop();
+myStack.pop();
+myStack.pop();
 
 /*
 *** Exercises:
